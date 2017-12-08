@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -11,7 +13,7 @@ from resources.store import Store,StoreList
 app = Flask(__name__)
 
 #Если объект был изменен, но не записан, то не фиксировать его.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydata.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",'sqlite:///mydata.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
